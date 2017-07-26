@@ -9,6 +9,7 @@
       <th>Description</th>
       <th>Price</th>
       <th>Stock</th>
+      <th>Buy</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -25,6 +26,7 @@
         </td>
         <td><%= print_price(product.price) %></td>
         <td><%= print_stock(product.stock) %></td>
+        <td><%= link_to "Order item", new_order_item_path(product_id: product.id) %></td>
       </tr>
     <% end %>
   </tbody>
