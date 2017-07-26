@@ -1,5 +1,6 @@
 class OrderItemsController < ApplicationController
   before_action :set_order_item, only: [:show, :edit, :update, :destroy]
+  before_action :load_order, only: [:create]
 
   # GET /order_items
   # GET /order_items.json
@@ -62,6 +63,14 @@ class OrderItemsController < ApplicationController
   end
 
   private
+    def load_order
+      begin
+        @order = Order.find(session[:order_id])
+      rescue ActiveRecord::RecordNotFound
+        @order = Order.create(status: "unsubmitted")
+        session[:order_id] = @order.id
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_order_item
       @order_item = OrderItem.find(params[:id])
