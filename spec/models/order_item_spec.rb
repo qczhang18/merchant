@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: order_items
+#
+#  id         :integer          not null, primary key
+#  product_id :integer
+#  order_id   :integer
+#  quantity   :integer          default(0)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 require 'rails_helper'
 
 RSpec.describe OrderItem, type: :model do
