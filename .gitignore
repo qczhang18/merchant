@@ -15,5 +15,5 @@
 
 /node_modules
 /yarn-error.log
-
+/config/initializers/omniauth.rb
 .byebug_history
