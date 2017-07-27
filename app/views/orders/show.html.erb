@@ -29,7 +29,13 @@
       <td> <%= print_price item.subtotal %> </td>
     </tr>
   <% end %>
-
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+    <td> Total: </td>
+    <td> <%= print_price @order.total %> </td>
+  </tr>
 </table>
 
 <%= link_to 'Edit', edit_order_path(@order) %> |
