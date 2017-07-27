@@ -1,12 +1,11 @@
 class OrderItemsController < ApplicationController
   before_action :set_order_item, only: [:show, :edit, :update, :destroy]
-  before_action :load_order, only: [:create]
+  before_action :load_order, only: [:create, :update]
 
   def edit
   end
 
   def create
-    #@order_item = @order.order_items.new(quantity: 1, product_id: params[:product_id])
     @order_item = @order.order_items.find_or_initialize_by(product_id: params[:product_id])
     @order_item.quantity += 1
 
@@ -24,7 +23,7 @@ class OrderItemsController < ApplicationController
   def update
     respond_to do |format|
       if @order_item.update(order_item_params)
-        format.html { redirect_to @order_item, notice: 'Order item was successfully updated.' }
+        format.html { redirect_to @order, notice: 'Order item was successfully updated.' }
         format.json { render :show, status: :ok, location: @order_item }
       else
         format.html { render :edit }
