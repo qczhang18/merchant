@@ -6,7 +6,8 @@ class OrderItemsController < ApplicationController
   end
 
   def create
-    @order_item = OrderItem.new(product_id: params[:product_id], order_id: @order.id )
+    #@order_item = OrderItem.new(product_id: params[:product_id], order_id: @order.id ) #old
+    @order_item = @order.order_items.new(quantity: 1, product_id: params[:product_id])
 
     respond_to do |format|
       if @order_item.save
