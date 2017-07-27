@@ -22,9 +22,13 @@ class OrderItemsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @order_item.update(order_item_params)
+      if params[:order_item][:quantity].to_i == 0
+        @order_item.destroy
+        format.html { redirect_to @order, notice: 'Item was successfully removed.' }
+        format.json { render :show, status: :ok, location: @order }
+      elsif @order_item.update(order_item_params)
         format.html { redirect_to @order, notice: 'Order item was successfully updated.' }
-        format.json { render :show, status: :ok, location: @order_item }
+        format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit }
         format.json { render json: @order_item.errors, status: :unprocessable_entity }
