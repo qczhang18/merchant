@@ -7,4 +7,11 @@ class ApplicationController < ActionController::Base
       @current_user ||= User.find(session[:user_id]) if session[:user_id]
     end
 
+    def load_order
+      @order = Order.find_or_initialize_by(id: session[:order_id]) { |order| order.status = "unsubmitted", order.user_id = session[:user_id] }
+      if @order.new_record?
+        @order.save!
+        session[:order_id] = @order.id
+      end
+    end
 end
