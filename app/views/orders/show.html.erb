@@ -41,6 +41,17 @@
     <td> Total: </td>
     <td> <%= print_price @order.total %> </td>
   </tr>
+  <tr>
+    <th>Shipping To:</th>
+    <td>
+      (addresses select box)
+      (add an address link)
+      <%= form_for @order do |f| %>
+        <%= f.select :address_id, current_user.addresses.collect{|a| [a.to_s, a.id]} %>
+      <% end %>
+    </td>
+  </tr>
+
 </table>
 <%= link_to 'Empty Order', @order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 <%#= link_to 'Edit', edit_order_path(@order) %> |
