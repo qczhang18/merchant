@@ -10,6 +10,6 @@ class SessionsController < ApplicationController
   def destroy
     session[:user_id] = nil
     session[:order_id] = nil
-    redirect_to products_path, notice: "Successfuly Logout"
+    redirect_to root_path, notice: "Successfuly Logout"
   end
 end

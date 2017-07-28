@@ -8,10 +8,11 @@ class ApplicationController < ActionController::Base
     end
 
     def load_order
-      @order = Order.find_or_initialize_by(id: session[:order_id]) { |order| order.status = "unsubmitted", order.user_id = session[:user_id] }
+      @order = Order.find_or_initialize_by(id: session[:order_id], status: "unsubmitted") { |x| x.user_id = session[:user_id] }
       if @order.new_record?
         @order.save!
         session[:order_id] = @order.id
       end
     end
+
 end
