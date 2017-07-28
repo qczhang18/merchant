@@ -1,4 +1,4 @@
-<h1>Your Order</h1>
+<h1>Order Confirmation</h1>
 
 <table>
   <tr>
@@ -20,17 +20,15 @@
     <th>Quantity</th>
     <th>Unit Price</th>
     <th>Subtotal</th>
-    <th>Remove</th>
   </tr>
   <% @order.order_items.each do |item| %>
     <tr>
       <td> <%= image_tag(item.product.image_url, size: "100") %> </td>
       <td> <%= item.product.title %> </td>
       <td> <%= print_stock(item.product.stock, item.quantity) %> </td>
-      <td> <%= link_to item.quantity, edit_order_item_path(item) %></td>
+      <td> <%= item.quantity %></td>
       <td> <%= item.product.price %> </td>
       <td> <%= print_price item.subtotal %> </td>
-      <td> <%= link_to 'Remove', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
   <tr>
@@ -44,15 +42,7 @@
   <tr>
     <th>Shipping To:</th>
     <td>
-      (addresses select box)
-      (add an address link)
-      <%= form_for @order do |f| %>
-        <%= f.select :address_id, current_user.addresses.collect{|a| [a.to_s, a.id]} %>
-        <%= f.submit "Submit Order" %>
-      <% end %>
+      <%= @order.address %>
     </td>
   </tr>
 </table>
-<%= link_to 'Empty Order', @order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-<%#= link_to 'Edit', edit_order_path(@order) %> |
-<%#= link_to 'Back', orders_path %>
